@@ -1,63 +1,91 @@
 📘 Postman API Testing Project – Simple Book API
+This repository contains an API automation framework built with Postman + Newman for testing the Simple Book API.
+It demonstrates functional testing, data-driven testing, CI/CD integration, reporting, and mock APIs – a complete QA portfolio project.
 
-This repository contains a Postman + Newman API testing project for the Simple Book API. It demonstrates API test automation, scripting, and reporting for various endpoints like books and orders.
-
-✅ Tools Used
-
-Postman – for API test creation and management
-
-Newman – for running collections via CLI
-
-HTML Reporter – for clean visual test reports
-
-JavaScript – for test scripts inside Postman
-
-📂 Folder Structure
-
-postman-api-testing-project/
-
+🔧 Tools & Technologies
+Postman – API test creation & execution
+Newman – CLI runner for Postman collections
+Newman HTML Extra Reporter – beautiful HTML test reports
+GitHub Actions – CI/CD pipeline for automated test runs
+JavaScript – for dynamic test scripts & validations
+📂 Project Structure
 ├── collections/
-
-   -----└── simple-book-api.postman_collection.json
-
+│ └── simple-book-api.postman_collection.json # Main test collection
+│
 ├── environment/
-
-   -----└── simple-book-api-env.postman_environment.json
-
+│ └── simple-book-api-env.postman_environment.json # Environment variables
+│
 ├── data/
-
-   -----└── testdata.csv        
-
+│ └── testdata.csv # Data-driven testing input
+│
 ├── reports/
+│ └── newman-report.html # Test execution report
+│
+├── .github/workflows/
+│ └── postman-tests.yml # GitHub Actions CI/CD pipeline
+│
+└── README.md
 
-   -----└── newman-report.html
+✅ Test Coverage
+The project covers Books & Orders APIs with:
 
-├── README.md
+Positive scenarios
+Get all books
+Get a single book by ID
+Place a new order
+Get order details
+Update order
+Delete order
+Negative scenarios
+Invalid/expired token
+Invalid book ID
+Unauthorized order update
+Data-driven testing
+Multiple customers & book IDs from testdata.csv
+Mock APIs
+Sample mock collection included for demo purposes
+🚀 How to Run Locally
+1️⃣ Install Node.js
+2️⃣ Install Newman & HTML reporter:
 
-🔧 How to Run the Tests
+npm install -g newman newman-reporter-htmlextra
 
-(Inside the folder run)
+newman run collections/simple-book-api.postman_collection.json
+-e environment/simple-book-api-env.postman_environment.json
+-d data/testdata.csv
+-r htmlextra
+--reporter-htmlextra-export reports/newman-report.html
 
-npm install -g newman ||
-npm install -g newman-reporter-htmlextra || 
-newman run collections/simple-book-api.postman_collection.json -e environment/simple-book-api-env.postman_environment.json -r htmlextra
+⚙️ CI/CD – GitHub Actions
 
-Features Covered
+This project includes a workflow (.github/workflows/postman-tests.yml) that:
 
-✅ Status code validation
+Runs on every Push or Pull Request to the main branch
 
-✅ Response structure and data checks
+Installs Node.js + Newman
 
-✅ Scripting using pm.test() and pm.response
+Executes all API tests
 
-✅ Filtering JSON data
+Uploads the HTML report as an artifact
 
-✅ Use of environment variables ({{baseURL}}, etc.)
+🔗 You can download the report from the GitHub Actions run page.
 
-✅ Dynamic chaining and data sharing across requests
+🌍 Environment Setup
 
-✅ Collection runner (via Newman)
+The environment file (simple-book-api-env.postman_environment.json) includes:
 
-✅ HTML test reporting
+baseUrl → API base URL
 
---
+accessToken → Authentication token
+
+👉 You can extend this for QA/Staging/Prod environments.
+
+📈 Future Enhancements
+
+Add JSON Schema validation for responses
+
+Expand negative test cases (invalid payloads, boundary values)
+
+Parameterize environment variables for multi-env testing
+
+Add Newman Slack/Email notification integration
